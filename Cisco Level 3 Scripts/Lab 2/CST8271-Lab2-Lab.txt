@@ -1,0 +1,36 @@
+en
+conf t
+
+hostname gros0059_Lab
+enable secret class
+no ip domain-lookup
+
+line con 0
+logging sync
+password class
+login
+
+line vty 0 15
+transport input telnet
+logging sync
+password class
+login
+
+interface g0/1
+ip add 202.2.129.150 255.255.255.252
+no shut
+
+interface g0/0
+ip add 202.2.129.153 255.255.255.252
+no shut
+
+interface loop0
+ip add 202.2.129.1 255.255.255.128
+exit
+
+router rip
+version 2
+network 202.2.129.0
+network 202.2.129.152
+network 202.2.129.148
+exit

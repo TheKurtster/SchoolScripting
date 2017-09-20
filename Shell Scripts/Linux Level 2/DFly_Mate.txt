@@ -1,0 +1,58 @@
+# How To Install the Mate Desktop on DragonFly BSD
+# Written by Kurt Grosser
+# thekurtgrosser@gmail.com --- kurtgrosser.com
+# March 6, 2017
+
+Ensure you are logged in as ROOT until you have finished the complete procedure.
+	login: root
+
+Ensure all packages are up-to-date
+	pkg update
+	pkg upgrade
+
+Install the following packages
+	pkg install
+		nano
+		xorg
+		mate-desktop mate
+		
+Reboot the system
+	reboot
+
+Edit the rc.conf file
+	nano /etc/rc.conf
+
+Add the following lines
+	dbus_enable="YES"
+	hald_enable="YES"
+
+Edit the root users .xinitrc file
+	nano .xinitrc
+
+Add the following line
+	exec mate-session
+
+Copy the file to your home directory
+	cp -a /root/.xinitrc /home/kurtgrosser/.xinitrc
+
+Install any applications you want to run in the desktop
+	pkg install
+		firefox
+		libreoffice
+		gimp
+		vlc
+		thunderbird
+
+Reboot the system
+	reboot
+
+Login as yourself
+	login: kurtgrosser
+
+Start the Mate Desktop
+	startx
+
+DONE! Mate Desktop Environment should start up.
+
+END OF FILE
+

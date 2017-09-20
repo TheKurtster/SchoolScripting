@@ -1,0 +1,43 @@
+en
+conf t
+
+hostname gros0059_HQ
+enable secret class
+no ip domain-lookup
+ip routing
+
+line con 0
+logging sync
+password class
+login
+
+line vty 0 15
+transport input telnet
+logging sync
+password class
+login
+
+interface range f0/1-48
+no switchport
+
+interface f0/5
+ip address 202.2.129.154 255.255.255.252
+no shut
+
+interface f0/3
+ip address 202.2.129.146 255.255.255.252
+no shut
+
+interface f0/1
+ip address 195.5.5.129 255.255.255.0
+no shut
+
+ip route 0.0.0.0 0.0.0.0 195.5.5.254
+
+router rip
+version 2
+network 202.2.129.144
+network 202.2.129.152
+default-information originate
+passive-interface fastEthernet 0/1
+exit

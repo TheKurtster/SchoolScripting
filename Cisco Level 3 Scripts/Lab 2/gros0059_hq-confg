@@ -1,0 +1,287 @@
+
+!
+! Last configuration change at 00:31:51 UTC Mon Mar 1 1993
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname gros0059_HQ
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$cor8$pSd1252mpcMVVkuxzwPgI0
+!
+no aaa new-model
+system mtu routing 1500
+ip routing
+no ip domain-lookup
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ no switchport
+ ip address 195.5.5.129 255.255.255.0
+!
+interface FastEthernet0/2
+ no switchport
+ no ip address
+!
+interface FastEthernet0/3
+ no switchport
+ ip address 202.2.129.146 255.255.255.252
+!
+interface FastEthernet0/4
+ no switchport
+ no ip address
+!
+interface FastEthernet0/5
+ no switchport
+ ip address 202.2.129.154 255.255.255.252
+!
+interface FastEthernet0/6
+ no switchport
+ no ip address
+!
+interface FastEthernet0/7
+ no switchport
+ no ip address
+!
+interface FastEthernet0/8
+ no switchport
+ no ip address
+!
+interface FastEthernet0/9
+ no switchport
+ no ip address
+!
+interface FastEthernet0/10
+ no switchport
+ no ip address
+!
+interface FastEthernet0/11
+ no switchport
+ no ip address
+!
+interface FastEthernet0/12
+ no switchport
+ no ip address
+!
+interface FastEthernet0/13
+ no switchport
+ no ip address
+!
+interface FastEthernet0/14
+ no switchport
+ no ip address
+!
+interface FastEthernet0/15
+ no switchport
+ no ip address
+!
+interface FastEthernet0/16
+ no switchport
+ no ip address
+!
+interface FastEthernet0/17
+ no switchport
+ no ip address
+!
+interface FastEthernet0/18
+ no switchport
+ no ip address
+!
+interface FastEthernet0/19
+ no switchport
+ no ip address
+!
+interface FastEthernet0/20
+ no switchport
+ no ip address
+!
+interface FastEthernet0/21
+ no switchport
+ no ip address
+!
+interface FastEthernet0/22
+ no switchport
+ no ip address
+!
+interface FastEthernet0/23
+ no switchport
+ no ip address
+!
+interface FastEthernet0/24
+ no switchport
+ no ip address
+!
+interface FastEthernet0/25
+ no switchport
+ no ip address
+!
+interface FastEthernet0/26
+ no switchport
+ no ip address
+!
+interface FastEthernet0/27
+ no switchport
+ no ip address
+!
+interface FastEthernet0/28
+ no switchport
+ no ip address
+!
+interface FastEthernet0/29
+ no switchport
+ no ip address
+!
+interface FastEthernet0/30
+ no switchport
+ no ip address
+!
+interface FastEthernet0/31
+ no switchport
+ no ip address
+!
+interface FastEthernet0/32
+ no switchport
+ no ip address
+!
+interface FastEthernet0/33
+ no switchport
+ no ip address
+!
+interface FastEthernet0/34
+ no switchport
+ no ip address
+!
+interface FastEthernet0/35
+ no switchport
+ no ip address
+!
+interface FastEthernet0/36
+ no switchport
+ no ip address
+!
+interface FastEthernet0/37
+ no switchport
+ no ip address
+!
+interface FastEthernet0/38
+ no switchport
+ no ip address
+!
+interface FastEthernet0/39
+ no switchport
+ no ip address
+!
+interface FastEthernet0/40
+ no switchport
+ no ip address
+!
+interface FastEthernet0/41
+ no switchport
+ no ip address
+!
+interface FastEthernet0/42
+ no switchport
+ no ip address
+!
+interface FastEthernet0/43
+ no switchport
+ no ip address
+!
+interface FastEthernet0/44
+ no switchport
+ no ip address
+!
+interface FastEthernet0/45
+ no switchport
+ no ip address
+!
+interface FastEthernet0/46
+ no switchport
+ no ip address
+!
+interface FastEthernet0/47
+ no switchport
+ no ip address
+!
+interface FastEthernet0/48
+ no switchport
+ no ip address
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface GigabitEthernet0/3
+!
+interface GigabitEthernet0/4
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+ version 2
+ passive-interface FastEthernet0/1
+ network 202.2.129.0
+ default-information originate
+!
+ip http server
+ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 195.5.5.254
+!
+!
+!
+!
+line con 0
+ password class
+ logging synchronous
+ login
+line vty 0 4
+ password class
+ logging synchronous
+ login
+ transport input telnet
+line vty 5 15
+ password class
+ logging synchronous
+ login
+ transport input telnet
+!
+end

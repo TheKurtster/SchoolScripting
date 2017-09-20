@@ -1,0 +1,54 @@
+enable
+conf t
+
+hostname gros0059_SA
+enable secret class
+
+line con 0
+logging sync
+password class
+login
+
+line vty 0 15
+transport input telnet
+logging sync
+password class
+login
+
+vtp mode transparent
+vlan 10
+vlan 20
+vlan 77
+
+interface f0/1
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk native vlan 77
+switchport trunk allowed vlan 10,20
+no shut
+
+interface range f0/2-12
+switchport mode access
+switchport access vlan 10
+no shut
+
+interface range f0/13-24
+switchport mode access
+switchport access vlan 20
+no shut
+
+interface vlan 10
+ip add 201.129.1.93 255.255.255.252
+no shut
+
+ip default-gateway 201.129.1.94
+
+[TESTING SECTION]
+show vlan
+show int trunk
+ping 199.9.9.9
+
+[COPY CONFIG TO TFTP]
+copy run tftp
+199.9.9.9
+gros0059_SA-config

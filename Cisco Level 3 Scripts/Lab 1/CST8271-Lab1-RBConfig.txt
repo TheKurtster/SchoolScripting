@@ -1,0 +1,34 @@
+enable
+conf t
+
+hostname gros0059_RB
+enable secret class
+
+line con 0
+logging sync
+password class
+login
+
+line vty 0 15
+transport input telnet
+logging sync
+password class
+login
+
+interface s0/2/1
+ip add 201.129.1.254 255.255.255.252
+no shut
+clock rate 128000 [ONLY IF DCE]
+
+interface loop0
+ip add 201.129.2.1 255.255.255.0
+
+ip route 0.0.0.0 0.0.0.0 s0/2/1 201.129.1.253
+
+[TESTING SECTION]
+ping 199.9.9.9 source loop0
+
+[COPY CONFIG TO TFTP]
+copy run tftp
+199.9.9.9
+gros0059_RB-config

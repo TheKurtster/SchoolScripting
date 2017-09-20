@@ -1,0 +1,73 @@
+enable
+conf t
+
+hostname gros0059_RA
+enable secret class
+no ip domain lookup
+
+line con 0
+logging sync
+password class
+login
+
+line vty 0 15
+transport input telnet
+logging sync
+password class
+login
+
+interface g0/1
+ip add 195.5.5.129 255.255.255.0
+no shut
+
+interface g0/0
+no shut
+
+interface g0/0.10
+encap dot1q 10
+ip add 201.129.1.94 255.255.255.248
+
+interface g0/0.20
+encap dot1q 20
+ip add 201.129.1.102 255.255.255.248
+
+interface g0/0.77
+encap dot1q 77
+no ip add
+
+[REMEMBER TO FIND OUT WHAT SERIAL INTERFACE RA IS ON AND IF IT IS DCE]
+interface s0/2/0
+ip add 201.129.1.253 255.255.255.252
+clock rate 128000
+no shut
+
+ip dhcp excluded-address 201.129.1.92 201.129.1.94
+ip dhcp excluded-address 201.129.1.100 201.129.1.102
+
+ip dhcp pool VLAN10POOL
+default-router 201.129.1.94
+network 201.129.1.88 255.255.255.248
+
+ip dhcp pool VLAN20POOL
+default-router 201.129.1.102
+network 201.129.1.96 255.255.255.248
+
+router rip
+version 2
+network 201.129.1.88
+network 201.129.1.96
+network 201.129.1.252
+network 195.5.5.0
+
+ip route 201.129.2.1 255.255.255.0 s0/2/0 201.129.1.254
+
+[TESTING SECTION]
+show ip dhcp binding
+show ip route
+show ip protocol
+ping 199.9.9.9
+
+[COPY CONFIG TO TFTP]
+copy run tftp
+199.9.9.9
+gros0059_RA-config

@@ -1,0 +1,32 @@
+enable
+configure terminal
+
+vlan vlan50
+
+interface vlan 50
+ip address 10.1.50.100 255.255.255.0
+no shut
+operstate up
+exit
+
+interface vlan 1
+no ip address
+shut
+exit
+
+ip default-gateway 10.1.50.1
+
+interface gi 1/0
+switchport mode trunk
+switchport trunk native vlan 50
+switchport trunk allowed vlan 50
+no shut
+exit
+
+interface gi 1/1
+switchport mode access
+switchport access vlan 50
+no shut
+exit
+
+copy running-config tftp: 10.1.50.17 kurt-grosser-5.cfg

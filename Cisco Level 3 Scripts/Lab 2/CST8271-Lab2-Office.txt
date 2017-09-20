@@ -1,0 +1,55 @@
+en
+conf t
+
+hostname gros0059_Office
+enable secret class
+no ip domain-lookup
+
+line con 0
+logging sync
+password class
+login
+
+line vty 0 15
+transport input telnet
+logging sync
+password class
+login
+
+interface range f0/1/0-3
+switchport mode access
+switchport access vlan 10
+switchport nonegotiate
+no shut
+
+interface range f0/1/4-8
+switchport mode access
+switchport access vlan 20
+switchport nonegotiate
+no shut
+
+interface vlan 1
+no ip address
+shut
+
+interface vlan 10
+ip add 202.2.129.142 255.255.255.248
+
+interface vlan 20
+ip add 202.2.129.134 255.255.255.248
+
+interface g0/0
+ip address 202.2.129.145 255.255.255.252
+no shut
+
+interface g0/1
+ip address 202.2.129.149 255.255.255.252
+no shut
+
+router rip
+version 2
+network 202.2.129.128
+network 202.2.129.136
+network 202.2.129.144
+network 202.2.129.148
+exit
